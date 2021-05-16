@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 
 const Players = () => {
   const [playerName, setPlayerName] = useState([]);
-  const [playerPic, setPlayerPic] = useState([]);
+
   
 
   const fetchData = () => {

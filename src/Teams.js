@@ -10,9 +10,14 @@ const Teams = ({ teams }) => {
           <tr>
             <th>TEAM</th>
             <th>DIV</th>
+            <th>CONFERENCE</th>
           </tr>
         </thead>
         <tbody>
+          {/* {
+            teams.filter(team => team.conference === "East")
+              .sort((a, b) => a.name > b.name ? 1 : -1)
+            .map(team =>  */}
           {
             teams.filter(team => team.conference === "East")
               .sort((a, b) => a.name > b.name ? 1 : -1)
@@ -20,6 +25,7 @@ const Teams = ({ teams }) => {
             <tr key={team.id}>
               <td>{team.full_name}</td>
               <td>{team.division}</td>
+              <td>{team.conference}</td>
             </tr>
             )}
         </tbody>
