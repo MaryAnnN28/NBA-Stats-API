@@ -1,66 +1,41 @@
-import React, { useEffect, useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Teams from './Teams';
-import Players from './Players';
-import axios from 'axios'
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Teams from './components/Teams/Teams';
+import Players from './components/Players/Players';
+import SearchBar from './components/Search/SearchBar';
+import Navbar from './components/Navbar/Navbar'
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 
-function App () {
-  
-  const [teams, setTeams] = useState("");
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  
-  useEffect(() => {
-    fetch('https://www.balldontlie.io/api/v1/teams')
-      .then(response => {
-        if (response.ok) {
-        return response.ok;
-        }
-        throw response; 
-      })
-      .then(teams => {
-        setTeams(teams);
-      })
-      .catch(error => {
-        console.error("error fetching data", error);
-        setError(error);
-      })
-      .finally(() => {
-        setLoading(false);
-    })
-  }, [])
+class App extends Component {
 
 
-  if (loading) return "Loading..."; //
-  if (error) return "Error!";
-  
-
-  // async componentDidMount() {
-  //   const url = "https://www.balldontlie.io/api/v1/teams"
-  //   let result = null;
-  //   try {
-  //     result = await axios(url, {
-  //       headers: {
-  //         Accept: 'application/json'
-  //       }
-  //     })
-  //   } catch (err) {
-  //     console.log(err)
-  //   }
-  //   this.setState({teams: result.data.data})
-  // }
-
-
+      
+  render() {
+    
     return (
-      <div className="App">
-        <Teams
-          teams={teams}
-          sort={this.state.sort}
-        />
+      <div>
+        <BrowserRouter>
+          <Navbar />
+          <SearchBar />
+          <Switch>
+            
+            <Route exact path={"/teams"} render={routerProps => 
+              <Teams {...routerProps} />}
+            />
+
+            <Route exact path={"/players"} render={routerProps => 
+              <Players {...routerProps} />}
+            />
+
+
+
+          </Switch>
+        </BrowserRouter>
         
-        <Players />
       </div>
     );
   }
+}
 
 export default App;
