@@ -6,8 +6,6 @@ import './Teams.css';
 const Teams = () => {
   
   const [teams, setTeams] = useState([]);
-  // const [filterTeamName, setFilterTeamName] = useState("");
-
 
   const fetchTeams = () => {
     const teamAPI = 'https://www.balldontlie.io/api/v1/teams'

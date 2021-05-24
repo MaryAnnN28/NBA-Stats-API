@@ -1,25 +1,38 @@
 import React from 'react';
 import './SearchBar.css'
-import { Form, FormControl } from 'react-bootstrap';
-import { Card } from 'react-bootstrap'
+import { Card } from 'react-bootstrap';
 
-function SearchBar() {
-  return (
-    <div className="search-bar">
-      <center>
-        <Card style={{ width: '30rem', alignItems: "center"}}>
+
+class SearchBar extends React.Component {
+  state = { term: '' };
+  
+  onFormSubmit = event => {
+    event.preventDefault();
+
+    this.props.onSubmit(this.state.term); 
+  }
+  
+  render() {
+    return (
+      <div className="search-bar">
+        <Card style={{ width: '30rem' }}>
           <Card.Body>
-            <Form>
-              <FormControl type="text" placeholder="Search by Teams or Players" className="mr-lg-2">
-
-              </FormControl>
-            </Form>
+            <form onSubmit={this.onFormSubmit} className="ui form">
+              <div class="ui fluid icon input">
+                <input
+                  type="text"
+                  value={this.state.term}
+                  placeholder="Search team or player..."
+                  onChange={e => this.setState({ term: e.target.value })}
+                />
+                <i class="search icon"></i>
+              </div>
+            </form>
           </Card.Body>
         </Card>
-
-      </center>
-    </div>
-  )
+      </div>
+    );
+  }
 }
 
 export default SearchBar; 

@@ -7,9 +7,11 @@ const Navbar = () => {
     <div>
       <div className="navbar-container">
         <div className="nav-header">
-          <h2>
-            NBA STATS
-          </h2>
+          <Link to="/">
+            <h2 className="logo">
+              NBA STATS
+            </h2>
+          </Link>
         </div>
 
         <div className="nav-links">

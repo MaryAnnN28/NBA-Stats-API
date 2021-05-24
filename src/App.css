@@ -7,5 +7,7 @@
 }
 
 body {
-  background-color: rgb(241, 241, 241);
+  height: max-content; 
+  background-size: cover; 
+  background: #7d8186;
 }
