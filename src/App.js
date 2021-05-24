@@ -50,7 +50,7 @@ class App extends React.Component {
               <TeamList {...routerProps} />}
             />
             <Route exact path={"/players"} render={routerProps => 
-              <PlayerPage {...routerProps} />}
+              <PlayerPage {...routerProps} players={this.state.players} />}
             />
             <Route exact path={"/seasonleaders"} render={routerProps =>
               <SeasonLeaders {...routerProps} />}
