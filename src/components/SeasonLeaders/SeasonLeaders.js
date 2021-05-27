@@ -14,9 +14,9 @@ const SeasonLeaders = () => {
 
  
   return (
-   <div className="ui container">
+    <div className="ui container" style={{ margin: '3rem', padding: '2rem' }}>
       
-      <div class="ui three column grid">
+      <div class="ui three column grid" style={{ marginBottom: '4em' }}>
         
         <div class="column">
           <div class="ui fluid card">

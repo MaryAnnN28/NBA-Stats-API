@@ -1,100 +1,104 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { Table } from 'react-bootstrap'
-import './Players.css'
+import React, { useState } from "react";
+import { BrowserRouter as Router, Link } from "react-router-dom";
+import axios from "axios";
+
+import "./Players.css";
+import Spinner from "../Layout/Spinner";
+import Alert from "../Layout/Alert";
 
 const Players = () => {
+  const [players, setPlayers] = useState([]);
+  const [term, setTerm] = useState("");
+  const [alert, setAlert] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  // season_avg_url = "https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=237"
+  const onChangeHandler = (e) => setTerm(e.target.value);
 
-  const [player, setPlayer] = useState([]);
-  const [seasonAvg, setSeasonAvg] = useState([]);
-  
-  const fetchData = () => {
-    const playerAPI = 'https://www.balldontlie.io/api/v1/players/417'
-    const avgAPI = 'https://www.balldontlie.io/api/v1/season_averages?season=2020&player_ids[]=417'
+  const setAlertMsg = (msg) => {
+    setAlert(msg);
+    setTimeout(() => setAlert(null), 5000);
+  };
 
-    const getPlayer = axios.get(playerAPI)
-    const getAvgs = axios.get(avgAPI)
+  const searchPlayers = async (term) => {
+    setLoading(true);
 
-    axios.all([getPlayer, getAvgs]).then(
-      axios.spread((...allData) => {
-        const allPlayerData = allData[0].data
-        const allSeasonAvg = allData[1].data.data[0]
-  
-        setPlayer(allPlayerData)
-        setSeasonAvg(allSeasonAvg)
-      })
-    )
-  }
+    const response = await axios.get(
+      `https://www.balldontlie.io/api/v1/players?search=${term}`
+    );
 
-  useEffect(() => {
-    fetchData()
-  }, [])
-  
-  return ( 
-    <div className="players-page">
-      <h1>{player.first_name} {player.last_name}</h1>
-      {/* <h3>{player.team.full_name}</h3> */}
-      <p>
-        
-        <b>Position:</b> {player.position} <br />
-        <b>Height:</b> {player.height_feet}'{player.height_inches}<br />
-        <b>Weight:</b> {player.weight_pounds}<br />
-      </p>
-      <Table>
-        <thead>
-          <tr>
-            <th>GP</th>
-            <th>MIN</th>
-            <th>PTS</th>
-            <th>FGM</th>
-            <th>FGA</th>
-            <th>3PM</th>
-            <th>3PA</th>
-            <th>FTM</th>
-            <th>FTA</th>
-            <th>OREB</th>
-            <th>DREB</th>
-            <th>REB</th>
-            <th>AST</th>
-            <th>STL</th>
-            <th>BLK</th>
-            <th>TO</th>
-            <th>PF</th>
-            <th>FG%</th>
-            <th>3%</th>
-            <th>FT%</th>
+    if (response.data.data.length === 0) {
+      setAlertMsg("There is no NBA player with that name");
+      setLoading(false);
+    } else {
+      setPlayers(response.data.data);
+      setLoading(false);
+    }
+  };
 
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{seasonAvg.games_played}</td>
-            <td>{seasonAvg.min}</td>
-            <td>{seasonAvg.pts}</td>
-            <td>{seasonAvg.fgm}</td>
-            <td>{seasonAvg.fga}</td>
-            <td>{seasonAvg.fg3m}</td>
-            <td>{seasonAvg.fg3a}</td>
-            <td>{seasonAvg.ftm}</td>
-            <td>{seasonAvg.fta}</td>
-            <td>{seasonAvg.oreb}</td>
-            <td>{seasonAvg.dreb}</td>
-            <td>{seasonAvg.reb}</td>
-            <td>{seasonAvg.ast}</td>
-            <td>{seasonAvg.stl}</td>
-            <td>{seasonAvg.blk}</td>
-            <td>{seasonAvg.turnover}</td>
-            <td>{seasonAvg.pf}</td>
-            <td>{seasonAvg.fg_pct}</td>
-            <td>{seasonAvg.fg3_pct}</td>
-            <td>{seasonAvg.ft_pct}</td>
-          </tr>
-        </tbody>
-      </Table>
+  const onSubmitHandler = (e) => {
+    e.preventDefault();
+    if (term === "") {
+      setAlertMsg("Please enter the player's name", "danger");
+    } else {
+      searchPlayers(term);
+      setTerm("");
+    }
+  };
+
+  const clearPlayersResults = () => {
+    setPlayers([]);
+    setLoading(false);
+  };
+
+  const showClearBtn = players.length > 0 ? true : false;
+
+  const playersList = players.map((player) => {
+    return (
+      
+      <div key={player.id} className="player-card">
+      <Router>
+        <Link
+          to={`/players/${player.id}`}
+          id={player.id}
+          className="player-name-link"
+        >
+          {player.first_name} {player.last_name}
+        </Link>
+      </Router>
+        <p>Position: {player.position}</p>
+        <p>Team: {player.team.full_name}</p>
+      </div>
+    );
+  });
+
+
+  return loading ? <Spinner /> : (
+    <div className="players-container">
+      { alert !== null && <Alert alert={alert} /> }
+      <div className="form-container">
+        <h1 className="players-heading">Browse players</h1>
+        <form onSubmit={onSubmitHandler} className="search-players-form">
+          <input
+            type="text"
+            value={term}
+            name="text"
+            className="search-input"
+            placeholder="Search for a player..."
+            onChange={onChangeHandler}
+          />
+          <input type="submit" value="Search" className="btn submit-btn" />
+        </form>
+        {showClearBtn && (
+          <button onClick={clearPlayersResults} className="btn clear-btn">
+            Clear results
+          </button>
+        )}
+      </div>
+      <div className="player-results-container">
+        {playersList}
+      </div>
     </div>
-  )
-}
+  );
+};
 
-export default Players
+export default Players;
