@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, Router } from "react-router-dom";
 
 import LandingPage from "../Layout/LandingPage";
 import PlayerPage from "../Players/PlayerPage";
@@ -15,7 +15,7 @@ const Routes = () => (
       <Route exact path="/players" component={PlayerPage} />
       <Route exact path="/players/:id" component={(props) => <Player {...props} />} />
       <Route exact path="/teams" component={Teams} />
-      <Route exact path="/teams/:id" component={(props) => <Team {...props} />} />
+      <Route exact path="/teams/:id" component={Team} />
       <Route exact path="/games" component={Games} />
       <Route exact path="/seasonleaders" component={SeasonLeaders} />
     </Switch>

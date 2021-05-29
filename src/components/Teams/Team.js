@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 import "./Team.css";
-import Spinner from "../Layout/Spinner";
+import Loader from "../Layout/Loader";
 
 const Team = (props) => {
   const [team, setTeam] = useState({});
@@ -16,18 +16,18 @@ const Team = (props) => {
     });
   }, [props.location.pathname]);
 
-  return loading ? <Spinner /> : (
+  return loading ? <Loader /> : (
     <>
     <div className="team-container">
       <h1 className="team-heading">{team.full_name}</h1>
       <p className="team-paragraph">
-        City: <b style={{ color: "#fff" }}>{team.city}</b>
+        City: <b style={{ color: "#000" }}>{team.city}</b>
       </p>
       <p className="team-paragraph">
-        Division: <b style={{ color: "#fff" }}>{team.division}</b>
+        Division: <b style={{ color: "#000" }}>{team.division}</b>
       </p>
       <p className="team-paragraph">
-        Conference: <b style={{ color: "#fff" }}>{team.conference}</b>
+        Conference: <b style={{ color: "#000" }}>{team.conference}</b>
       </p>
     </div>
     </>

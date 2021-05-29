@@ -9,19 +9,31 @@
 .player-header {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: left;
   line-height: 1.5;
 }
 
 .player-heading {
   font-size: 3rem;
-  text-align: center;
+  text-align: left;
   line-height: 1.2;
   margin-bottom: 1rem;
 }
 
-.player-paragraph {
+.player-info {
   font-size: 1.5rem;
+}
+
+.player-info--key {
+  text-transform: uppercase;
+  font-size: 1.2rem; 
+  font-weight: 600;
+  padding-right: 1rem; 
+  color: #154360;
+}
+
+.player-info--value {
+  text-align: left;
 }
 
 .btns-container {

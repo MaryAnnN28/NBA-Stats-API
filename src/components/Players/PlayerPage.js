@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import axios from "axios";
 
 import "./Players.css";
-import Spinner from "../Layout/Spinner";
+import Loader from "../Layout/Loader";
 import Alert from "../Layout/Alert";
 
 const Players = () => {
@@ -72,7 +72,7 @@ const Players = () => {
   });
 
 
-  return loading ? <Spinner /> : (
+  return loading ? <Loader /> : (
     <div className="players-container">
       { alert !== null && <Alert alert={alert} /> }
       <div className="form-container">

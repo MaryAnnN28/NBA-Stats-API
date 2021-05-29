@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Link } from "react-router-dom";
 import * as NBAIcons from 'react-nba-logos'; 
 
 import "../Teams/Teams.css";
-import Spinner from "../Layout/Spinner";
+
 
 const Teams = () => {
   const [teams, setTeams] = useState([]);
@@ -18,10 +18,11 @@ const Teams = () => {
     });
   }, []);
 
-  const filterTeamsByDivision = (divisionName) => {
+
+  const teamByName = (fullName) => {
     return teams
       .filter((team) => {
-        return team.division === divisionName;
+        return team.full_name === fullName;
       })
       .map((team) => (
         <h4 className="team-name-heading" key={team.id}>
@@ -37,120 +38,312 @@ const Teams = () => {
       ));
   };
 
-  const atlanticDivisionTeams = filterTeamsByDivision("Atlantic");
-  const pacificDivisionTeams = filterTeamsByDivision("Pacific");
-  const centralDivisionTeams = filterTeamsByDivision("Central");
-  const southeastDivisionTeams = filterTeamsByDivision("Southeast");
-  const southwestDivisionTeams = filterTeamsByDivision("Southwest");
-  const northwestDivisionTeams = filterTeamsByDivision("Northwest");
+  const PHI = teamByName( 'Philadelphia 76ers' );
+  const NYK = teamByName( 'New York Knicks' ); 
+  const BOS = teamByName( 'Boston Celtics' );
+  const BKN = teamByName( 'Brooklyn Nets' );
+  const TOR = teamByName( 'Toronto Raptors' );
+  
+  const CHI = teamByName( 'Chicago Bulls' );
+  const CLE = teamByName( 'Cleveland Cavaliers' );
+  const DET = teamByName( 'Detroit Pistons' );
+  const IND = teamByName( 'Indiana Pacers' );
+  const MIL = teamByName( 'Milwaukee Bucks' );
+  
+  const ATL = teamByName( 'Atlanta Hawks' );
+  const CHA = teamByName( 'Charlotte Hornets' );
+  const MIA = teamByName( 'Miami Heat' );
+  const ORL = teamByName( 'Orlando Magic' );
+  const WAS = teamByName( 'Washington Wizards' );
+  
+  const DEN = teamByName( 'Denver Nuggets' );
+  const MIN = teamByName( 'Minnesota Timberwolves' );
+  const OKC = teamByName( 'Oklahoma City Thunder' );
+  const POR = teamByName( 'Portland Trail Blazers' );
+  const UTA = teamByName( 'Utah Jazz' );
+  
+  const GSW = teamByName( 'Golden State Warriors' );
+  const LAC = teamByName( 'LA Clippers' );
+  const LAL = teamByName( 'Los Angeles Lakers' );
+  const PHX = teamByName( 'Phoenix Suns' );
+  const SAC = teamByName( 'Sacramento Kings' );
+  
+  const DAL = teamByName( 'Dallas Mavericks' );
+  const HOU = teamByName( 'Houston Rockets' );
+  const MEM = teamByName( 'Memphis Grizzlies' );
+  const NOP = teamByName( 'New Orleans Pelicans' );
+  const SAS = teamByName( 'San Antonio Spurs' );
+  
 
-  return loading ? <Spinner /> : (
+
+
+  return (
     <>
     <div className="teams-container">
-      <h1 className="teams-heading">NBA Teams</h1>
+        <h2 className="teams-heading">All Teams</h2>
+        
+        <hr className="hr-teams" align="center"/>
 
-        <div className="divisions-container ui container" styles={{ align: 'center' }}>
-        <div className="ui cards">
+        <div className="divisions-container ui container">
+          
+        <div className="divisions-container ui three stackable cards">
+          <div className="divisions-container-cards column">
             
-          <div className="ui card">
-            <div className="content">
-              <div className="divisions-team-heading header">ATLANTIC</div>
-            </div>
-            <div className="content">
-              <div className="description">
-                <p>{atlanticDivisionTeams}
-                  <NBAIcons.PHI size={50} />
-                  <NBAIcons.NYK size={50} />
-                  <NBAIcons.BOS size={50} />
-                  <NBAIcons.BKN size={50} />
-                  <NBAIcons.TOR size={50} />
-                </p>
+            <div className="ui fluid card">
+              <div className="content">
+                <div className="divisions-team-heading header">ATLANTIC</div>
+              </div>
+              <div className="content">
+                  <div className="description">
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.PHI size={40} /></div>
+                        <div className="team-name">{PHI}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.BOS size={40} /></div>
+                        <div className="team-name">{BOS}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.BKN size={40} /></div>
+                        <div className="team-name">{BKN}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.NYK size={40} /></div>
+                        <div className="team-name">{NYK}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.TOR size={40} /></div>
+                        <div className="team-name">{TOR}</div>
+                      </li>
+                    </ul>              
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="ui card">
-            <div className="content">
-              <div className="divisions-team-heading header">PACIFIC</div>
-            </div>
-            <div className="content">
-              <div className="description">
-                <p>{pacificDivisionTeams}</p>
-                  <NBAIcons.GSW size={50} />
-                  <NBAIcons.LAC size={50} />
-                  <NBAIcons.LAL size={50} />
-                  <NBAIcons.PHX size={50} />
-                  <NBAIcons.SAC size={50} />
-              </div>
-            </div>
-          </div>
-
-          <div className="ui card">
+          <div className="divisions-container-cards column">
+          <div className="ui fluid card">
             <div className="content">
               <div className="divisions-team-heading header">CENTRAL</div>
             </div>
             <div className="content">
               <div className="description">
-                <p>{centralDivisionTeams}</p>
-                 <NBAIcons.CHI size={50} />
-                  <NBAIcons.CLE size={50} />
-                  <NBAIcons.DET size={50} />
-                  <NBAIcons.IND size={50} />
-                  <NBAIcons.MIL size={50} />
+              <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.CHI size={40} /></div>
+                      <div className="team-name">{CHI}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.CLE size={40} /></div>
+                      <div className="team-name">{CLE}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.DET size={40} /></div>
+                      <div className="team-name">{DET}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.IND size={40} /></div>
+                      <div className="team-name">{IND}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.MIL size={40} /></div>
+                      <div className="team-name">{MIL}</div>
+                    </li>
+                  </ul>            
               </div>
             </div>
+            </div>
           </div>
-        
-          <div className="ui card">
+
+          
+          <div className="divisions-container-cards column">
+          <div className="ui fluid card">
             <div className="content">
               <div className="divisions-team-heading header">SOUTHEAST</div>
             </div>
             <div className="content">
               <div className="description">
-                <p>{southeastDivisionTeams}</p>
-                  <NBAIcons.CHI size={50} />
-                  <NBAIcons.CLE size={50} />
-                  <NBAIcons.DET size={50} />
-                  <NBAIcons.IND size={50} />
-                  <NBAIcons.MIL size={50} />
+              <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.ATL size={40} /></div>
+                      <div className="team-name">{ATL}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.CHA size={40} /></div>
+                      <div className="team-name">{CHA}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.MIA size={40} /></div>
+                      <div className="team-name">{MIA}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.ORL size={40} /></div>
+                      <div className="team-name">{ORL}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.WAS size={40} /></div>
+                      <div className="team-name">{WAS}</div>
+                    </li>
+                  </ul>            
               </div>
+            </div>
             </div>
           </div>
         
-          <div className="ui card">
-            <div className="content">
-              <div className="divisions-team-heading header">SOUTHWEST</div>
-            </div>
-            <div className="content">
-              <div className="description">
-                  <p>{southwestDivisionTeams}</p>
-                  <NBAIcons.DAL size={50} />
-                  <NBAIcons.HOU size={50} />
-                  <NBAIcons.MEM size={50} />
-                  <NBAIcons.NOP size={50} />
-                  <NBAIcons.SAS size={50} />
-              </div>
-            </div>
-          </div>
-        
-          <div className="ui card">
+          
+          <div className="divisions-container-cards column">
+          <div className="ui fluid card">
             <div className="content">
               <div className="divisions-team-heading header">NORTHWEST</div>
             </div>
             <div className="content">
               <div className="description">
-                  <p>{northwestDivisionTeams}</p>
-                  <NBAIcons.DEN size={50} />
-                  <NBAIcons.MIN size={50} />
-                  <NBAIcons.OKC size={50} />
-                  <NBAIcons.POR size={50} />
-                  <NBAIcons.UTA size={50} />
+              <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.DEN size={40} /></div>
+                      <div className="team-name">{DEN}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.MIN size={40} /></div>
+                      <div className="team-name">{MIN}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.OKC size={40} /></div>
+                      <div className="team-name">{OKC}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.POR size={40} /></div>
+                      <div className="team-name">{POR}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.UTA size={40} /></div>
+                      <div className="team-name">{UTA}</div>
+                    </li>
+                  </ul>            
+              </div>
+            </div>
+            </div>
+          </div>
+
+          <div className="divisions-container-cards column">
+            <div className="ui fluid card">
+              <div className="content">
+                <div className="divisions-team-heading header">PACIFIC</div>
+              </div>
+              <div className="content">
+                <div className="description">
+                  <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.GSW size={40} /></div>
+                        <div className="team-name">{GSW}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.LAC size={40} /></div>
+                        <div className="team-name">{LAC}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.LAL size={40} /></div>
+                        <div className="team-name">{LAL}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.PHX size={40} /></div>
+                        <div className="team-name">{PHX}</div>
+                      </li>
+                    </ul>
+                    <ul className="division-info">
+                      <li>
+                        <div className="team-logo"><NBAIcons.SAC size={40} /></div>
+                        <div className="team-name">{SAC}</div>
+                      </li>
+                    </ul>         
+                </div>
               </div>
             </div>
           </div>
+
+          <div className="divisions-container-cards column">
+            <div className="ui fluid card">
+              <div className="content">
+                <div className="divisions-team-heading header">SOUTHWEST</div>
+              </div>
+              <div className="content">
+                <div className="description">
+                <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.DAL size={40} /></div>
+                      <div className="team-name">{DAL}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.HOU size={40} /></div>
+                      <div className="team-name">{HOU}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.MEM size={40} /></div>
+                      <div className="team-name">{MEM}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.NOP size={40} /></div>
+                      <div className="team-name">{NOP}</div>
+                    </li>
+                  </ul>
+                  <ul className="division-info">
+                    <li>
+                      <div className="team-logo"><NBAIcons.SAS size={40} /></div>
+                      <div className="team-name">{SAS}</div>
+                    </li>
+                  </ul>         
+                </div>
+              </div>
+            </div>
+        </div>
         
         </div>
-      </div>
+    </div>
   </div>
 
       

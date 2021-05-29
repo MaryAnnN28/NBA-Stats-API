@@ -27,39 +27,36 @@ const SeasonAvgTable = ({ player, seasonAvg }) => {
   } = seasonAvg;
 
   return (
-    <table>
-      <caption className="table-caption">
-        {player.first_name} {player.last_name}'s season average stats
-      </caption>
+    <table class="ui compact table">
       <thead>
         <tr>
-          <th>GP</th>
-          <th>MIN</th>
-          <th>PTS</th>
-          <th>FGA</th>
-          <th>FGM</th>
-          <th>FG %</th>
-          <th>3FGA</th>
-          <th>3FGM</th>
-          <th>3FG %</th>
-          <th className="hide-stat">FTA</th>
-          <th className="hide-stat">FTM</th>
-          <th className="hide-stat">FT %</th>
-          <th className="hide-stat">O. REB</th>
-          <th className="hide-stat">D. REB</th>
-          <th>REB</th>
-          <th>AST</th>
-          <th>BLK</th>
-          <th>STL</th>
-          <th>PF</th>
-          <th>TO</th>
+          <th className="center aligned">GP</th>
+          <th className="center aligned">MIN</th>
+          <th className="center aligned">PTS</th>
+          <th className="center aligned">FGA</th>
+          <th className="center aligned">FGM</th>
+          <th className="center aligned">FG%</th>
+          <th className="center aligned">3FGA</th>
+          <th className="center aligned">3FGM</th>
+          <th className="center aligned">3FG%</th>
+          <th className="center aligned">FTA</th>
+          <th className="center aligned">FTM</th>
+          <th className="center aligned">FT%</th>
+          <th className="center aligned">OREB</th>
+          <th className="center aligned">DREB</th>
+          <th className="center aligned">REB</th>
+          <th className="center aligned">AST</th>
+          <th className="center aligned">BLK</th>
+          <th className="center aligned">STL</th>
+          <th className="center aligned">PF</th>
+          <th className="center aligned">TO</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>{games_played}</td>
           <td>{min}</td>
-          <td style={{ backgroundColor: "#c9082a", color: "#fff" }}>{pts}</td>
+          <td>{pts}</td>
           <td>{fga}</td>
           <td>{fgm}</td>
           <td>{String(Math.round(fg_pct * 100))}</td>
@@ -71,7 +68,7 @@ const SeasonAvgTable = ({ player, seasonAvg }) => {
           <td className="hide-stat">{String(Math.round(ft_pct * 100))}</td>
           <td className="hide-stat">{oreb}</td>
           <td className="hide-stat">{dreb}</td>
-          <td>{reb}</td>
+          <td >{reb}</td>
           <td>{ast}</td>
           <td>{blk}</td>
           <td>{stl}</td>
