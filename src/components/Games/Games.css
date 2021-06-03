@@ -21,16 +21,16 @@
   margin-top: 1rem;
 }
 
-.game-container {
+/* .game-container {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 50%;
   margin: auto;
   text-align: center;
   color: #080999;
   border: 1px solid black;
   margin: 1rem 0;
-}
+} */
 
 .date-and-time {
   display: flex;
@@ -40,8 +40,8 @@
   line-height: 1.4;
 }
 
-.team-vs-team-paragraph {
-  font-size: 1.2rem;
+.game-details {
+  font-size: .5rem;
   padding: 0.6rem;
   display: flex;
   flex-direction: column;

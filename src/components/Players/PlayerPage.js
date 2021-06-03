@@ -76,8 +76,9 @@ const Players = () => {
     <div className="players-container">
       { alert !== null && <Alert alert={alert} /> }
       <div className="form-container">
-        <h1 className="players-heading">Browse players</h1>
-        <form onSubmit={onSubmitHandler} className="search-players-form">
+        <h1 className="players-heading">Browse NBA Players</h1>
+        <form onSubmit={onSubmitHandler} className="ui form">
+          <div className="ui fluid icon input">
           <input
             type="text"
             value={term}
@@ -86,11 +87,12 @@ const Players = () => {
             placeholder="Search for a player..."
             onChange={onChangeHandler}
           />
-          <input type="submit" value="Search" className="btn submit-btn" />
+          <i className="search icon"></i>
+          </div>
         </form>
         {showClearBtn && (
           <button onClick={clearPlayersResults} className="btn clear-btn">
-            Clear results
+            Clear search results
           </button>
         )}
       </div>

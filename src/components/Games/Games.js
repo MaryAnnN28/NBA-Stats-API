@@ -9,29 +9,30 @@ const Games = () => {
 
   useEffect(() => {
     // const today = new Date().toISOString().slice( 0, 10 );
-    const today = new Date().toDateString();
-    const tomorrow = new Date(today).toDateString() + 1; 
+    const today = new Date().toISOString().slice( 0, 10 );
+
     setLoading(true);
-    axios.get(`https://www.balldontlie.io/api/v1/games?start_date=${today}&end_date=${tomorrow}`).then((game) => {
+    axios.get(`https://www.balldontlie.io/api/v1/games?start_date=${today}&end_date=${today}`).then((game) => {
       setGames(game.data.data);
       setLoading(false);
     })
   }, []);
 
   const gamesList = games.map((game) => {
-    // const date = new Date(game.date);
+
 
     return (
-      <div key={game.id} className="game-container">
+      
+      <div key={game.id} className="ui card">
         <div className="date-and-time">
         <p className="team-vs-team-paragraph">
-          <span>{game.home_team.full_name}</span>
-          <span>{game.home_team_score}</span>
-          <span> VS </span>
-          <span>{game.visitor_team.full_name}</span>
-          <span>{game.home_team_score}</span>
+          <span className="home-team-abv">{game.home_team.abbreviation}</span>
+          <span className="home-team-score">{game.home_team_score}</span>
+          <span>  </span>
+          <span className="visitor-team-abv">{game.visitor_team.abbreviation}</span>
+          <span className="visitor-team-score">{game.home_team_score}</span>
         </p>
-          <h2 className="time-heading">{game.status}</h2>
+          <h3 className="time-heading">{game.status}</h3>
         </div>
       </div>
     );
