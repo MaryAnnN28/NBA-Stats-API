@@ -82,7 +82,7 @@ const Players = () => {
           <input
             type="text"
             value={term}
-            name="text"
+            //name="text"
             className="search-input"
             placeholder="Search for a player..."
             onChange={onChangeHandler}
