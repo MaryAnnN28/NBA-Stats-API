@@ -55,18 +55,21 @@ const Players = () => {
   const playersList = players.map((player) => {
     return (
       
-      <div key={player.id} className="player-card">
+      <div key={player.id} className="ui card">
       <Router>
         <Link
           to={`/players/${player.id}`}
           id={player.id}
-          className="player-name-link"
         >
-          {player.first_name} {player.last_name}
+          <center><h3>{player.first_name} {player.last_name}</h3></center>
         </Link>
       </Router>
-        <p>Position: {player.position}</p>
-        <p>Team: {player.team.full_name}</p>
+        <p>
+          <br />
+          <b>Position:</b> {player.position}
+          <br />
+          <b>Team:</b> {player.team.full_name}
+        </p>
       </div>
     );
   });
@@ -78,17 +81,20 @@ const Players = () => {
       <div className="form-container">
         <h1 className="players-heading">Browse NBA Players</h1>
         <form onSubmit={onSubmitHandler} className="ui form">
-          <div className="ui fluid icon input">
+          <div className="ui action input">
+
           <input
             type="text"
             value={term}
-            //name="text"
+            name="text"
             className="search-input"
             placeholder="Search for a player..."
             onChange={onChangeHandler}
           />
-          <i className="search icon"></i>
           </div>
+          <button type="submit" className="ui icon button">
+            <i class="search icon"></i>
+          </button>
         </form>
         {showClearBtn && (
           <button onClick={clearPlayersResults} className="btn clear-btn">
